@@ -1,0 +1,118 @@
+/* Kick VOD Resume Extension - In-Page Content Styles */
+
+.kvr-toast-container {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 2147483647;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  pointer-events: none;
+}
+
+.kvr-toast {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(15, 18, 20, 0.95);
+  border: 1px solid rgba(83, 252, 24, 0.35);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6), 0 0 16px rgba(83, 252, 24, 0.15);
+  border-radius: 12px;
+  padding: 14px 18px;
+  color: #ffffff;
+  font-size: 14px;
+  min-width: 280px;
+  max-width: 400px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  pointer-events: auto;
+  opacity: 0;
+  transform: translateY(20px) scale(0.96);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.kvr-toast.kvr-show {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.kvr-toast-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: rgba(83, 252, 24, 0.15);
+  color: #53fc18;
+  flex-shrink: 0;
+}
+
+.kvr-toast-icon svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
+.kvr-toast-content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.kvr-toast-title {
+  font-weight: 700;
+  font-size: 13px;
+  color: #53fc18;
+  letter-spacing: 0.2px;
+}
+
+.kvr-toast-desc {
+  font-size: 13px;
+  color: #e1e7eb;
+  line-height: 1.35;
+}
+
+.kvr-toast-desc b {
+  color: #ffffff;
+}
+
+.kvr-toast-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.kvr-btn-resume {
+  background: #53fc18;
+  color: #0b0e0f;
+  border: none;
+  font-weight: 700;
+  font-size: 12px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.1s ease;
+}
+
+.kvr-btn-resume:hover {
+  background: #6eff3b;
+  transform: translateY(-1px);
+}
+
+.kvr-btn-dismiss {
+  background: transparent;
+  color: #8b96a3;
+  border: 1px solid #2d3339;
+  font-size: 12px;
+  padding: 5px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.kvr-btn-dismiss:hover {
+  color: #ffffff;
+  border-color: #4a5568;
+}

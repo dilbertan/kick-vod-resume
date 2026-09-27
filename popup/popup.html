@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kick VOD Resume</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header & Status -->
+    <header class="app-header">
+      <div class="logo-area">
+        <div class="kick-badge">
+          <svg class="kick-icon" viewBox="0 0 24 24">
+            <path d="M4 3h4v8.5l6-8.5h5l-7.5 9.5L20 21h-5l-7-9.5V21H4V3z"/>
+          </svg>
+        </div>
+        <div class="title-group">
+          <h1>Kick VOD</h1>
+          <span class="subtitle">Resume Playback</span>
+        </div>
+      </div>
+      <div class="header-status" id="tabStatus">
+        <span class="status-indicator-dot" id="statusDot"></span>
+        <span class="status-text" id="statusText">Detecting...</span>
+      </div>
+    </header>
+
+    <!-- Active VOD Quick Save Card -->
+    <section class="active-vod-section" id="activeVodCard" style="display: none;">
+      <div class="active-vod-card">
+        <div class="card-header">
+          <span class="badge badge-channel" id="activeChannel">Channel</span>
+          <span class="active-time" id="activeTimeDisplay">00:00:00</span>
+        </div>
+        <div class="active-title" id="activeTitle" title="">VOD Title</div>
+        
+        <button id="btnSaveCurrent" class="btn-primary btn-save">
+          <svg class="btn-icon" viewBox="0 0 24 24">
+            <path d="M17 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm-5 16c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-10H5V5h10v4z"/>
+          </svg>
+          <span id="btnSaveText">Save Current Timestamp</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- Not On VOD Notice Card -->
+    <section class="not-on-vod-section" id="notOnVodNotice" style="display: none;">
+      <div class="notice-card">
+        <svg class="notice-icon" viewBox="0 0 24 24">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+        </svg>
+        <div class="notice-text">
+          No active <b>Kick VOD</b> found in the current tab. Open any stream recording on Kick to quickly save your playback position.
+        </div>
+      </div>
+    </section>
+
+    <!-- Saved VODs Header & Actions -->
+    <section class="records-header">
+      <div class="records-title-group">
+        <h2>Saved VODs</h2>
+        <span class="count-badge" id="recordCount">0</span>
+      </div>
+      <button id="btnClearAll" class="btn-clear-all" title="Clear all saved records" style="display: none;">
+        Clear All
+      </button>
+    </section>
+
+    <!-- Search Box (Shown when records exist) -->
+    <div class="search-box" id="searchBox" style="display: none;">
+      <svg class="search-icon" viewBox="0 0 24 24">
+        <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+      </svg>
+      <input type="text" id="searchInput" placeholder="Search by channel or title..." />
+    </div>
+
+    <!-- Records List -->
+    <main class="records-container" id="recordsList">
+      <!-- Populated dynamically via JS -->
+    </main>
+
+    <!-- Empty State -->
+    <div class="empty-state" id="emptyState" style="display: none;">
+      <div class="empty-icon-wrapper">
+        <svg class="empty-svg" viewBox="0 0 24 24">
+          <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.2 3.2.8-1.3-4.5-2.7V7z"/>
+        </svg>
+      </div>
+      <h3>No Saved VODs Yet</h3>
+      <p>While watching any Kick VOD, click the <b>"Save Current Timestamp"</b> button above or use the keyboard shortcut.</p>
+    </div>
+
+    <!-- Footer / Shortcut Tip -->
+    <footer class="app-footer">
+      <div class="shortcut-tip">
+        <span>Shortcut:</span>
+        <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>S</kbd>
+      </div>
+      <span class="version-tag">v1.0.0</span>
+    </footer>
+  </div>
+
+  <!-- Confirmation Modal (Clear All) -->
+  <div class="modal-backdrop" id="clearModal" style="display: none;">
+    <div class="modal-card">
+      <div class="modal-title">Delete All Records?</div>
+      <div class="modal-desc">All saved Kick VOD progress timestamps will be permanently removed. This action cannot be undone.</div>
+      <div class="modal-actions">
+        <button id="modalCancelBtn" class="btn-secondary">Cancel</button>
+        <button id="modalConfirmBtn" class="btn-danger">Yes, Delete All</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
